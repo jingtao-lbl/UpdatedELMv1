@@ -5,3 +5,4 @@ Tao, J., Zhu, Q., Riley, W. J., and Neumann, R. B.: Improved ELMv1-ECA Simulatio
 
 To use the updated ELMv1 (i.e., ELMv1a and ELMv1b), please download E3SM (https://github.com/E3SM-Project/E3SM), then copy the modified codes included in this package to /SourceMods/src.clm/ under the case script folder, and then rebuild the model.
 
+By Jing Tao (jingtao@lbl.gov) (Last updated on October 12, 2021.)
