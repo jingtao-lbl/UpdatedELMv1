@@ -1418,7 +1418,6 @@ end subroutine SolveTemperature
          qflx_glcice_melt(c) = 0._r8
          qflx_snow_melt(c) = 0._r8
 		 
-		 !write(iulog,"(A10,I4,15(1X,F10.4))") 'Before:', c, (t_soisno(c,j), j = 1, 15)
       end do
 
       do j = -nlevsno+1,nlevgrnd       ! all layers
@@ -1487,12 +1486,12 @@ end subroutine SolveTemperature
 				  if (j <= 10) then 
 					!Jing Tao: phase change efficiency (epsilon) for thawing
 					eps(c,j) = min(max(h2osoi_ice(c,j)/denice/dz(c,j)/watsat(c,j), 0.01_r8), 1._r8) 
-					eta_psi(c,j) = 4._r8
+					!eta_psi(c,j) = 4._r8
 				  else	!j==1 or 11-15 layers
 					eps(c,j) = 1._r8 ! equal to make t_soisno(c,j) = tfrz 
-					eta_psi(c,j) = 0._r8
+					!eta_psi(c,j) = 0._r8
 				  endif 
-				  !write(iulog,"(A10,2(I4),(1X,F18.8))") 'thawing:', c,j,eps(c,j)
+				  
 				  tinc(c,j) = (tfrz - t_soisno(c,j))*eps(c,j)
 				  t_soisno(c,j) = t_soisno(c,j) + tinc(c,j)
                endif
@@ -1507,11 +1506,11 @@ end subroutine SolveTemperature
                      supercool(c,j) = supercool(c,j)*dz(c,j)*1000._r8       ! (mm)
                   endif
 				  
-					!Jing Tao added virtual temperature (YangWang: Eq. 10)
+					!Jing Tao: added virtual temperature (YangWang: Eq. 10)
 					vsm_pec = min(1.0_r8, max(max(h2osoi_liq(c,j),1.0e-6_r8)/(dz(c,j)*denh2o)/watsat(c,j),0.01_r8)) 
 					smp = -sucsat(c,j)*vsm_pec**(-bsw(c,j))
 					supertemp(c,j) = 1000._r8*hfus*tfrz/(1000._r8*hfus-grav*smp)
-					!write(iulog,"(A10,2(I4),5(1X,F18.8))") 'supertemp:', c,j,sucsat(c,j),bsw(c,j),hfus,grav,vsm_pec,supertemp(c,j)
+					
                endif
 
                if (h2osoi_liq(c,j) > supercool(c,j) .AND. t_soisno(c,j) < supertemp(c,j)) then
@@ -1522,12 +1521,12 @@ end subroutine SolveTemperature
 				  if (j <=10) then
 					!Jing Tao: phase change efficiency (epsilon) for freezing
 					eps(c,j) = min(max(h2osoi_liq(c,j)/denh2o/dz(c,j)/watsat(c,j), 0.01_r8), 1._r8)
-					eta_psi(c,j) = 1._r8
+					!eta_psi(c,j) = 1._r8
 				  else	!j==1 or 11-15 layers
 					eps(c,j) = 1._r8 ! equal to make t_soisno(c,j) = tfrz 
-					eta_psi(c,j) = 0._r8
+					!eta_psi(c,j) = 0._r8
 				  endif 
-				  !write(iulog,"(A10,2(I4),(1X,F18.8))") 'freezing:', c,j,eps(c,j)
+				  
 				  tinc(c,j) = (supertemp(c,j) - t_soisno(c,j))*eps(c,j) 
 				  t_soisno(c,j) = t_soisno(c,j) + tinc(c,j)
                endif
@@ -1546,14 +1545,7 @@ end subroutine SolveTemperature
          end do
       enddo
 
-	  !do fc = 1,num_nolakec
-      !      c = filter_nolakec(fc)
-			!write(iulog,"(A10,I4,15(1X,F10.4))") 'CheckLiq:', c, (h2osoi_liq(c,j), j = 1, 15)
-			!write(iulog,"(A10,I4,15(1X,F10.4))") 'CheckSup:', c, (supercool(c,j), j = 1, 15)
-			!write(iulog,"(A10,I20,I4,15(1X,I4))") 'CheckMlt:', nstep, c, (imelt(c,j), j = 1, 15)
-	  !enddo 
-	  
-      do j = -nlevsno+1,nlevgrnd       ! all layers
+	  do j = -nlevsno+1,nlevgrnd       ! all layers
          do fc = 1,num_nolakec
             c = filter_nolakec(fc)
 
@@ -1594,9 +1586,10 @@ end subroutine SolveTemperature
 						   
                         else	!Soil layers (not including 1st layer, i.e., j >1), fact(c,j) = dtime/cv(c,j); eps=1 for 11 - 15 layers.
 						
-                           hm(c,j) = - tinc(c,j)/fact(c,j) !already applied eps(c,j) to tinc
+                           hm(c,j) = - tinc(c,j)/fact(c,j) !Jing Tao: already applied eps(c,j) to tinc
 						   
-						   !eng_ch(c,j) = (1-eps(c,j))*(t_soisno_ba(c,j)-tfrz)/fact(c,j)	!do not need this if t_soisno(c,j) = t_soisno(c,j) + tinc(c,j)*eps(c,j)
+						   !Jing Tao: do not need this if t_soisno(c,j) = t_soisno(c,j) + tinc(c,j)*eps(c,j)
+						   !eng_ch(c,j) = (1-eps(c,j))*(t_soisno_ba(c,j)-tfrz)/fact(c,j)	
 						   
                         endif
 						
@@ -1684,11 +1677,7 @@ end subroutine SolveTemperature
                               
 							  t_soisno(c,j) = t_soisno(c,j) + fact(c,j)*heatr
 							  
-							  !Readjust according to Eq. 15 (Yang&Wang, 2018)
-							  !if (j >= 2 .and. j <= 10) then 
-							  !	t_soisno(c,j) = t_soisno(c,j) + fact(c,j)*fn_mod(c,j)*eps(c,j)*eta_psi(c,j)
-							  !	eng_ch(c,j) = fn_mod(c,j)*eps(c,j)*eta_psi(c,j)
-							  !end if
+							  !Jing Tao: Readjust 
 							  
 							  if (h2osoi_liq(c,j) > supercool(c,j) .AND. t_soisno(c,j) < supertemp(c,j)) then
 								eng_ch(c,j) = - (supertemp(c,j) - t_soisno(c,j))/fact(c,j)
@@ -1764,7 +1753,6 @@ end subroutine SolveTemperature
             eflx_snomelt_r(c) = eflx_snomelt(c)
          end if
 		 
-		 !write(iulog,"(A10,I4,15(1X,F10.4))") 'After:', c, (t_soisno(c,j), j = 1, 15)
 		 
       end do
 
