@@ -9,4 +9,4 @@ To use the updated ELMv1 (i.e., ELMv1a and ELMv1b), please download E3SM (https:
 By Jing Tao (jingtao@lbl.gov) (Last updated on October 12, 2021.)
 
 Cite as:
-Jing Tao. (2021). Updated ELMv1-ECA for improving simulations of zero-curtain periods and cold-season carbon emissions at tundra sites (ELMv1a&v1b). Zenodo. https://doi.org/10.5281/zenodo.5719514
+Jing Tao. (2021). Updated ELMv1-ECA for improving simulations of soil zero-curtain periods and cold-season carbon emissions at tundra sites (ELMv1a&v1b). Zenodo. https://doi.org/10.5281/zenodo.5722558
