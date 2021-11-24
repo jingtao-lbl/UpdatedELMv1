@@ -9,8 +9,11 @@ To use the updated ELMv1 (i.e., ELMv1a and ELMv1b), please download E3SM (https:
 For example, to use ELMv1b:
 
 cd $CASE_NAME
+
 cp $CODE_PATH/CH4Mod_ELMv1b.F90 ./SourceMods/src.clm/CH4Mod.F90
+
 cp $CODE_PATH/DecompCascadeBGCMod_ELMv1b.F90 ./SourceMods/src.clm/DecompCascadeBGCMod.F90
+
 cp $CODE_PATH/SoilTemperatureMod.F90 ./SourceMods/src.clm/
 
 By Jing Tao (jingtao@lbl.gov) (Last updated on October 12, 2021.)
