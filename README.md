@@ -7,6 +7,7 @@ Tao, J., Zhu, Q., Riley, W. J., and Neumann, R. B.: Improved ELMv1-ECA Simulatio
 To use the updated ELMv1 (i.e., ELMv1a and ELMv1b), please download E3SM (https://github.com/E3SM-Project/E3SM) first, then copy the modified codes included in this package to /SourceMods/src.clm/ under the case script folder, and then rebuild the model.
 
 For example, to use ELMv1b:
+
 cd $CASE_NAME
 cp $CODE_PATH/CH4Mod_ELMv1b.F90 ./SourceMods/src.clm/CH4Mod.F90
 cp $CODE_PATH/DecompCascadeBGCMod_ELMv1b.F90 ./SourceMods/src.clm/DecompCascadeBGCMod.F90
