@@ -2,7 +2,7 @@
 
 This package contains modified ELMv1-ECA codes associated with the paper below:
 
-Tao, J., Zhu, Q., Riley, W. J., and Neumann, R. B.: Improved ELMv1-ECA Simulations of Zero-Curtain Periods and Cold-season CH4 and CO2 Emissions at Alaskan Arctic Tundra Sites, The Cryosphere, https://doi.org/10.5194/tc-15-5281-2021, 2021.
+Tao, Jing, Qing Zhu, William J. Riley, and Rebecca B. Neumann. "Improved ELMv1-ECA simulations of zero-curtain periods and cold-season CH 4 and CO 2 emissions at Alaskan Arctic tundra sites." The Cryosphere 15, no. 12 (2021): 5281-5307. https://doi.org/10.5194/tc-15-5281-2021.
 
 To use the updated ELMv1 (i.e., ELMv1a and ELMv1b), please download E3SM (https://github.com/E3SM-Project/E3SM) first, then copy the modified codes included in this package to /SourceMods/src.clm/ under the case script folder, and then rebuild the model.
 
